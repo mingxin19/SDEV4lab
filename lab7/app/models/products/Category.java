@@ -1,4 +1,4 @@
-package models;
+package models.products;
 
 import java.util.*;
 import javax.persistence.*;
@@ -20,21 +20,29 @@ public class Category extends Model {
    private String name;
 
    // Category contains many products
-   @OneToMany
+   @ManyToMany(cascade = CascadeType.ALL)
    private List<ItemOnSale> items;
 
    // Default constructor
    public  Category() {
    }
 			    
-   public  Category(Long id, String name, List<ItemOnSale> items) {
+    public  Category(Long id, String name, List<ItemOnSale> items) {
       this.id = id;
       this.name = name;
       this.items = items;
-   }
-   public Long getId() {
+    }
+    public Long getId() {
     return id;
-}
+    }
+
+
+    public static boolean inCategory(Long category, Long item){
+        return find.query().where().eq("items.id", item)
+                            .eq("id", category)
+                            .findList().size() > 0;
+    }
+
 
 public void setId(Long id) {
     this.id = id;
@@ -72,4 +80,6 @@ public static Map<String,String> options() {
     }
     return options;
  }
+
+
 }

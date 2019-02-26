@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import models.*;
 import models.users.*;
+import models.products.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -69,6 +70,11 @@ public Result addItemSubmit() {
         return badRequest(addItem.render(newItemForm,User.getUserById(session().get("email"))));
     } else {
         ItemOnSale newItem = newItemForm.get();
+        List<Category> newCats = new ArrayList<Category>();
+        for(Long cat : newItem.getCatSelect()){
+            newCats.add(Category.find.byId(cat));
+        }
+        newItem.setCategories (newCats);
         
         if(newItem.getId()==null){
         newItem.save();

@@ -1,4 +1,4 @@
-@(items: List[models.ItemOnSale],categories: List[models.Category],user: models.users.User)
+@(items: List[models.products.ItemOnSale],categories: List[models.products.Category],user: models.users.User)
 @main("On Sale",user){
     <h1>On sale here</h1>
 
@@ -29,7 +29,6 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Category</th>
             <th>Description</th>
             <th>Stock</th>
             <th>Price</th>
@@ -43,7 +42,6 @@
                <tr>
                   <td>@i.getId</td>
                   <td>@i.getName</td>
-                  <td>@i.getCategory.getName</td>
                   <td>@i.getDescription</td>
                   <td>@i.getStock</td>
                   <td>&euro; @("%.2f".format(i.getPrice))</td>
