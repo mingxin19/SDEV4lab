@@ -23,6 +23,10 @@ public class User extends Model {
     @Constraints.Required
     private String password;
 
+    @Constraints.Required
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
+
     public static final Finder<Long, User> find = new Finder<>(User.class);
 
     
@@ -79,5 +83,17 @@ public class User extends Model {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getDateOfBirthString() {
+        return String.format("%1$td %1$tB %1$tY", dateOfBirth);
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

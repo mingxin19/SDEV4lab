@@ -19,6 +19,13 @@
             <th>Role</th>
             <th>Name</th>
             <th>Password</th>
+            <th>Date Of Birth</th>
+            <th>Street 1</th>
+            <th>Street 2</th>
+            <th>Town</th>
+            <th>Post Code</th>
+            <th>Credit Card</th>
+
         </tr>
         </thead>
         <tbody>
@@ -31,6 +38,13 @@
                   <td>@u.getRole</td>
                   <td>@u.getName</td>
                   <td>@u.getPassword</td>
+                  <td>@u.getDateOfBirth</td>
+                  <td>@u.getStreet1</td>
+                  <td>@u.getStreet2</td>
+                  <td>@u.getTown</td>
+                  <td>@u.getPostCode</td>
+                  <td>@u.getCreditCard</td>
+               
                   <!-- Update button -->
 						<td>
 							<a href="@routes.HomeController.updateCustomer(u.getEmail)" class="button-xs btn-danger">

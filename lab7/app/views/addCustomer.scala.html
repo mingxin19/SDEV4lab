@@ -24,10 +24,11 @@
             @inputText(userForm("role").copy(value=Some("customer")), '_label -> "", 'hidden -> "hidden")
             @inputText(userForm("name"), '_label -> "Name", 'class -> "form-control")
             @inputText(userForm("password"), '_label -> "Password", 'class -> "form-control")
+            @inputDate(userForm("dateOfBirth"), args = 'size -> 10, '_label -> "Date Of Birth", 'class -> "form-control")
             @inputText(userForm("street1"), '_label -> "Street 1", 'class -> "form-control")
             @inputText(userForm("street2"), '_label -> "Street 2", 'class -> "form-control")
             @inputText(userForm("town"), '_label -> "Town", 'class -> "form-control")
-            @inputText(userForm("postCode"), '_label -> "POst Code", 'class -> "form-control")
+            @inputText(userForm("postCode"), '_label -> "Post Code", 'class -> "form-control")
             @inputText(userForm("creditCard"), '_label -> "Credit Card Number", 'class -> "form-control")
 
 

@@ -25,6 +25,7 @@ create table user (
   role                          varchar(255),
   name                          varchar(255),
   password                      varchar(255),
+  date_of_birth                 date,
   street1                       varchar(255),
   street2                       varchar(255),
   town                          varchar(255),
