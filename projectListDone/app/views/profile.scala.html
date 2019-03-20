@@ -1,0 +1,56 @@
+@(employee: models.users.Employee,userEmail: models.users.User, user: models.users.User, env: play.api.Environment)
+
+@main("My Profile",user) {
+
+<p class="lead">
+  @if(user.getRole.equals("admin")){Administrator}
+  @if(user.getRole.equals("manager")){Manager}
+  @if(user.getRole.equals("employee")){Employee}
+</p>
+
+@if(flash.containsKey("success")) {
+  <div class="alert alert-success">
+    @flash.get("success")
+  </div>
+}
+
+
+
+<div class="row">
+  
+  <div class="col-sm-3">
+    @if(env.resource("public/images/userImages/" + user.getEmail + "thumb.jpg").isDefined){
+      <td><img src="/assets/images/userImages/@(user.getEmail +"thumb.jpg")"/></td>
+    }else{
+      <td><img src="/assets/images/userImages/noImage.png"></td>
+    }
+
+  </div>
+  
+</div>
+
+
+<div class="row"> 
+    <div class="col-sm-4">
+        <h3>Name: </h3>
+        <h3>@user.getName</h3>
+    </div>
+  <div class= "col-sm-4">
+    <h3>Email: </h3>
+    <h3>@user.getEmail</h3>
+  </div>
+  @if(user.getRole.equals("employee")){
+    <div class= "col-sm-4">
+        <h3>Department: </h3>
+        <h3>@employee.getDepartment.getName</h3>
+      </div>
+  }
+ 
+</div>    
+
+
+
+
+}
+
+

@@ -1,0 +1,64 @@
+@(users: List[models.users.Customer], user: models.users.User)
+@main("Admin Customer", user){
+    <h1>List of users</h1>
+    @if(flash.containsKey("success")){
+		<div class="alert alert-success">
+			@flash.get("success")
+		</div>
+    }
+    <div class="col-sm-3">
+		<h4>Categories</h4>
+		<div class="list-group">
+			<a href="@routes.HomeController.admin_cust()" class="list-group-item">All categories</a>
+			
+		</div>
+    </div>
+    <div class="col-sm-9">
+        <h4>Add/Delete/Update users</h4>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <!-- The header row-->
+            <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Name</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+            @for(i<-users){
+                <tr>
+                <td>@i.getEmail</td>
+                <td>@i.getRole</td>
+                <td>@i.getName</td>
+
+                @if((user != null) &&("admin".equals(user.getRole()))){
+                    <td>
+                        <a href="@routes.HomeController.updateCust(i.getEmail)" class="button-xs btn-danger">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+                
+                    <td>
+                        <a href="@routes.HomeController.deleteCust(i.getEmail)" class="button-xs btn-danger" onclick="return confirmDel();">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                }
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        
+        @if((user != null) && ("admin".equals(user.getRole()))){
+    
+        
+        <p>
+            <a href="@routes.HomeController.addCust()">
+                <button class="btn btn-primary">Add a new user</button>
+            </a>
+        </p>
+        }
+    </div>
+}

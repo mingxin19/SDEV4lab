@@ -1,0 +1,58 @@
+@(userList: List[models.users.User], user: models.users.User)
+@main("User",user) {
+
+<p class="lead">User Catalogue</p>
+    @if(flash.containsKey("success")) {
+      <div class="alert alert-success">
+      @flash.get("success")
+    </div>
+    }
+  
+    <table class="table table-bordered table-hover table-condensed">
+     
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Role</th>
+          <th>Email</th>
+          
+          <th colspan="2"></th>      
+        </tr>
+      </thead>
+
+      <tbody>
+        @for(p<-userList) {
+          <tr>
+            
+            <td>@p.getName</td>
+            <td>@p.getRole</td>      
+            <td>@p.getEmail</td>
+            
+          
+            <td>
+                <a href="@routes.HomeController.updateUser(p.getEmail)" class="button xs btn-danger">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+              </td>        <td>
+                <a href="@routes.HomeController.deleteUser(p.getEmail)" class="button xs btn-danger" onclick="return confirmDel();">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </td>
+          
+            
+          </tr>
+        }
+      </tbody>
+
+    </table>
+    
+    <p>
+      <a href="@routes.HomeController.addUser()">
+        <button class="btn btn-primary">Add an user</button>
+      </a>
+    </p>
+  
+  
+
+}

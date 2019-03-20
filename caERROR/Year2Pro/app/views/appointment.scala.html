@@ -1,0 +1,54 @@
+@(appForm: Form[models.users.Appointment],user: models.users.User)
+@import helper._
+
+@main("Appointment",user){
+    <p class="lead">Book Appointment</p>
+
+    @if(appForm.hasGlobalErrors){
+        <p class="alert alert-warning">
+            @for(e <- appForm.globalErrors){
+                @e.message<br/>
+            }
+        </p>
+    }
+    @if(flash.containsKey("success")){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+    }
+    @if(flash.containsKey("error")){
+        <div class="alert alert-error">
+            @flash.get("error")
+        </div>
+    }
+
+    
+    
+ 
+    @form(action=routes.AppointmentController.appointmentSubmit(), 'class -> "form-horizontal", 'role -> "form") {
+        @* CSRF attack prevention *@
+        @* This token, sent by the controller, will be used to authenticate the form submission *@
+        @CSRF.formField
+
+        
+            @inputText(appForm("name"), '_label -> "Name", 'class -> "form-control")
+            @inputText(appForm("email"), '_label -> "Email", 'class -> "form-control")
+            @inputText(appForm("phoneNumber"), '_label -> "Phone Number", 'class -> "form-control")
+            @inputText(appForm("date"), '_label -> "Date (You Preferred)", 'class -> "form-control")
+            @inputText(appForm("time"), '_label -> "Time (You Preferred)", 'class -> "form-control")
+            @inputText(appForm("artist"), '_label -> "Artist", 'class -> "form-control")
+            @inputText(appForm("description"), '_label -> "Description of the Tattoo", 'class -> "form-control")
+            @inputText(appForm("size"), '_label -> "Size of the Tattoo", 'class -> "form-control")
+            @inputText(appForm("placement"), '_label -> "Place you want your Tattoo on", 'class -> "form-control")
+            @inputText(appForm("colour"), '_label -> "Colour of the Tattoo", 'class -> "form-control")
+            @inputText(appForm("id"), '_label -> "", 'hidden -> "hidden")
+            
+            
+            <div class="actions">
+                <input type="submit" value="Confirm Appointment" class="btn btn-primary">
+                <a href="@routes.AppointmentController.appointment()">
+                    <button type="button" class="btn btn-warning">Cancel</button>
+                </a>
+            </div>
+    } 
+}

@@ -1,0 +1,92 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+GET     /index                      controllers.HomeController.index
+GET     /gallerya                   controllers.HomeController.gallerya
+GET     /galleryk                   controllers.HomeController.galleryk
+GET     /gallerym                   controllers.HomeController.gallerym
+
+GET     /userProfile                controllers.HomeController.userProfile
+# An example controller showing how to use dependency injection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+
+
+
+GET     /login                      controllers.LoginController.login
+
+GET     /loginSubmit                controllers.LoginController.loginSubmit
+
+GET     /logout                     controllers.LoginController.logout
+
+
+
+
+
+GET     /admin_users                controllers.HomeController.admin_users
+
+GET     /admin_artist               controllers.HomeController.admin_artist
+
+GET     /admin_cust                 controllers.HomeController.admin_cust
+
+GET     /admin_appointments         controllers.HomeController.admin_appointments
+
+
+
+
+
+GET     /addAdmin                   controllers.HomeController.addAdmin
+
+POST    /addAdminSubmit             controllers.HomeController.addAdminSubmit
+
+GET     /deleteAdmin/:id            controllers.HomeController.deleteAdmin(id: String)
+
+GET     /updateAdmin/:id            controllers.HomeController.updateAdmin(id: String)
+
+
+
+GET     /addArtist                  controllers.HomeController.addArtist
+
+POST    /addArtistSubmit            controllers.HomeController.addArtistSubmit
+
+GET     /deleteArtist/:id           controllers.HomeController.deleteArtist(id: String)
+
+GET     /updateArtist/:id           controllers.HomeController.updateArtist(id: String)
+
+
+
+GET     /addCust                    controllers.HomeController.addCust
+
+POST    /addCustSubmit              controllers.HomeController.addCustSubmit
+
+GET     /deleteCust/:id             controllers.HomeController.deleteCust(id: String)
+
+GET     /updateCust/:id             controllers.HomeController.updateCust(id: String)
+
+
+
+
+
+GET     /registerUser               controllers.LoginController.registerUser
+
+POST    /registerUserSubmit         controllers.LoginController.registerUserSubmit
+
+
+
+
+
+GET     /appointment                controllers.AppointmentController.appointment
+
+POST    /appointmentSubmit          controllers.AppointmentController.appointmentSubmit
+
+GET     /deleteAppointment/:id             controllers.AppointmentController.deleteAppointment(id: Int)
+
+GET     /updateAppointment/:id             controllers.AppointmentController.updateAppointment(id: Int)

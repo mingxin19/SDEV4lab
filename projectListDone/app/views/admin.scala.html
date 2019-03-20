@@ -1,0 +1,60 @@
+@(admin: List[models.users.Admin], user: models.users.User, env: play.api.Environment)
+
+@main("Admin",user) {
+
+<p class="lead">Administrator List</p>
+
+@if(flash.containsKey("success")) {
+  <div class="alert alert-success">
+    @flash.get("success")
+  </div>
+}
+
+<table class="table table-bordered table-hover table-condensed">
+
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Update</th>
+      <th>Delete</th>     
+    </tr>
+  </thead>
+
+  <tbody>
+    @for(e<-admin) {
+      <tr>
+        @if(env.resource("public/images/userImages/" + e.getEmail + "thumb.jpg").isDefined){
+          <td><img src="/assets/images/userImages/@(e.getEmail +"thumb.jpg")"/></td>
+        }else{
+          <td><img src="/assets/images/userImages/noImage.png"></td>
+        }
+        <td>@e.getName</td>
+        <td>@e.getRole</td>
+        <td>@e.getEmail</td>
+        <td>@e.getPassword</td>
+        <td>
+          <a href="@routes.HomeController.updateAdmin(e.getEmail)" class="button-xs btn-danger">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+        </td>  
+        <td>
+          <a href="@routes.HomeController.deleteAdmin(e.getEmail)" class="button-xs btn-danger"  onclick="return confirmDel()">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
+      </tr>
+    }
+  </tbody>
+
+</table>
+<p>
+  <a href="@routes.HomeController.addAdmin()">
+    <button class="btn btn-primary">Add an admin</button>
+  </a>
+</p>
+
+}

@@ -1,0 +1,26 @@
+@(userForm: Form[models.users.Employee],user: models.users.User)
+@import helper._
+
+@main("Add Employee",user) {
+    <p class="lead">Add a new employee</p>
+    @form(action=routes.HomeController.addEmployeeSubmit(), 'class-> "form-horizontal",
+         'role -> "form", 'method -> "POST", 'enctype -> "multipart/form-data") {
+        @CSRF.formField
+
+        @inputText(userForm("name"), '_label -> "Name", 'class -> "form_control")
+        @inputText(userForm("email"), '_label -> "E-mail", 'class -> "form_control")
+        @inputText(userForm("password"), '_label -> "Password", 'class -> "form_control")
+
+        @inputText(userForm("role").copy(value=Some("employee")), '_label -> "", 'hidden -> "hidden")
+
+        <label>Image Upload</label>
+        <input class="btn-sm btn-default" type="file" name="upload">
+
+        <div class="actions">
+            <input type="submit" value="Add/Update Employee" class="btn btn-primary">
+            <a href="@routes.HomeController.employee">
+                <button type="button" class="btn btn-warning">Cancel</button>
+            </a>
+        </div>
+        }
+}

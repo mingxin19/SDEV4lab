@@ -1,0 +1,73 @@
+@(pagename: String, user: models.users.User)(content:Html)
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("assets/styles.css")' />
+  <script src="@routes.Assets.versioned("assets/functions.js")"></script>
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+	</head>
+	<body>
+	<header>
+	</header>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Tattoo Saloon</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li {class="dropdown"}><a class="dropdown-toggle" data-toggle="dropdown" href="#">Gallery<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li @if(pagename == "Andrew"){class="active"}><a href="/gallerya">Andrew</a></li>
+            <li @if(pagename == "Kevin"){class="active"}><a href="/galleryk">Kevin</a></li>
+            <li @if(pagename == "Ming"){class="active"}><a href="/gallerym">Ming</a></li>
+          </ul>
+        </li>
+        <li @if(pagename == "Appointment"){class="active"}><a href="@routes.AppointmentController.appointment()">Book Appointment</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          @if((user != null) &&("admin".equals(user.getRole()))){
+            <li {class="dropdown"}><a class="dropdown-toggle" data-toggle="dropdown" href="#">User<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li @if(pagename == "Users"){class="active"}><a href="@routes.HomeController.admin_users()">Admin</a></li>
+                <li @if(pagename == "Admin Artist"){class="active"}><a href="@routes.HomeController.admin_artist()">Artist</a></li>
+                <li @if(pagename == "Admin Customer"){class="active"}><a href="@routes.HomeController.admin_cust()">Customer</a></li>
+                <li @if(pagename == "Admin Appointments"){class="active"}><a href="@routes.HomeController.admin_appointments()">Appointments</a></li>
+              </ul>
+            </li>
+          }
+          @if((user !=null)){
+            <li @if(pagename == "Profile"){class="active"}><a href="@routes.HomeController.userProfile()"><span class="glyphicon glyphicon-user"></span> @user.getName()</a></li>
+          } else{
+        <li @if(pagename == "Register"){class="active"}><a href="@routes.LoginController.registerUser()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        }
+        <li @if(pagename == "Log In"){class="active"}>
+          @if(user != null){
+            <a href="@routes.LoginController.logout()">Log Out</a>
+          }else{
+            <a href="@routes.LoginController.login()">Log In</a>
+          }
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="body_layout">
+
+	<main>
+    @content
+    </main>
+	</div>
+  </body>
+  </html>
